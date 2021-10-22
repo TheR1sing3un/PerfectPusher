@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr:  #服务注册中心地址
+      config:
+        server-addr:  #配置中心地址
+        file-extension: yaml #配置文件格式
+  application:
+    name: gateway-service #服务名
+server:
+  port: 8088

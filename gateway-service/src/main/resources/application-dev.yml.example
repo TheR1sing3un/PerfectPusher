@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启服务发现
+      routes:
+        - id: user_routh #无具体意义,唯一即可
+          uri: lb://user-service #负载均衡访问用户服务
+          predicates:
+            - Path=/user/** #用户服务路径匹配
+jwt:
+  secret:  #jwt加密secret
+  expire:  #token过期时间(秒)
+token:
+  enable: true #是否开启token全局过滤器
+  ignore-url:
+    -  /user/login/** #忽略token过滤的路径
