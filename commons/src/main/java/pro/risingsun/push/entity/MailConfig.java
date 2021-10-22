@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class mailConfig {
+public class MailConfig {
     private Long userId;
     private String mailAddress;
 }

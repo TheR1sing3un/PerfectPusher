@@ -66,6 +66,7 @@ public class JwtUtils {
         }catch (TokenExpiredException tokenExpiredException){
             throw new TokenException(TokenException.TOKEN_EXPIRED,"token已经过期");
         }catch (Exception e){
+            e.printStackTrace();
             throw new TokenException(TokenException.TOKEN_VERIFY_ERROR,"token解析异常");
         }
         return jwt.getClaims();
