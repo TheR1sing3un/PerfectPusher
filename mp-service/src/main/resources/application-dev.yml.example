@@ -1,0 +1,9 @@
+wx:
+  mp:
+    appId:
+    appSecret:
+    token:
+    sceneStr:  # 二维码场景值
+    expire:  #二维码过期时间
+    #根据ticket拼接二维码的地址
+    showCodeUrl: "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="
