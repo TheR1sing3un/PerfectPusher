@@ -13,6 +13,6 @@ import pro.risingsun.push.entity.CpConfig;
 @Mapper
 public interface CpConfigMapper {
 
-    @Select("select user_id,corp_id,agent_id,secret from tbl_cp_config where user_id = #{userId}")
+    @Select("select user_id,corp_id,agent_id,secret,target from tbl_cp_config where user_id = #{userId}")
     CpConfig getCpConfigById(Long userId);
 }

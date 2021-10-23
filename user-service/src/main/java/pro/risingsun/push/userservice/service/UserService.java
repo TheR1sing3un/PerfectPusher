@@ -17,4 +17,7 @@ public interface UserService {
     UserInfoDTO getUserInfo(Long id);
 
     CpConfig updateCpConfig(CpConfig cpConfig);
+
+    Boolean bindMailAddress(Long id);
+
 }

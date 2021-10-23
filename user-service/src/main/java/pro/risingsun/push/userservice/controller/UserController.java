@@ -56,10 +56,21 @@ public class UserController {
      * @param cpConfig
      * @return
      */
-    @PatchMapping("/cpConfig/{id}")
-    public CommonResult updateCpConfig(@RequestBody CpConfig cpConfig){
+    @PutMapping("/cpConfig/{id}")
+    public CommonResult updateCpConfig(@PathVariable Long id ,@RequestBody CpConfig cpConfig){
+        cpConfig.setUserId(id);
         CpConfig config = userService.updateCpConfig(cpConfig);
         return CommonResult.ok().data(config);
     }
 
+    @PutMapping("/mail/{id}")
+    public CommonResult bindMailAddress(@PathVariable Long id){
+        userService.bindMailAddress(id);
+        return CommonResult.ok();
+    }
+
+    @PostMapping("/mail/{id}")
+    public CommonResult checkMailCode(@PathVariable Long id,@RequestBody Integer code){
+        return CommonResult.ok();
+    }
 }

@@ -25,7 +25,7 @@ class UserServiceApplicationTests {
     void contextLoads() {
     }
 
-    @Test
+   /* @Test
     void testRedis(){
         redisUtils.hset("sendKey","1","qwe");
         System.out.println(redisUtils.hget("sendKey", "1"));
@@ -40,10 +40,5 @@ class UserServiceApplicationTests {
     @Test
     void testUserExist(){
         System.out.println(userMapper.checkUserExist(15l));
-    }
-
-    @Test
-    void testCpConfigUpdate(){
-        System.out.println(userService.updateCpConfig(new CpConfig(15l, "qweqwe", 2l, "asdasd")));
-    }
+    }*/
 }

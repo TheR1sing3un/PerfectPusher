@@ -1,0 +1,34 @@
+mq:
+  mail:
+    queue-name: MailQueue
+    exchange-name: MailExchange
+    routing-key: MailRouting
+
+spring:
+  mail:
+    #smtp服务主机
+    host: smtp.qq.com
+    #服务协议
+    protocol: smtp
+    #编码集
+    default-encoding: UTF-8
+    #发送邮件的账户
+    username:
+    #邮件账号授权码
+    password:
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  servlet:
+    multipart:
+      max-file-size: 30MB
+  rabbitmq:
+    host:
+    username:
+    password:
+    virtual-host: /

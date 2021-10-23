@@ -69,6 +69,17 @@ public class UserServiceImpl implements UserService {
         return cpConfig;
     }
 
+    /**
+     * 绑定邮箱
+     * @param id
+     * @return
+     */
+    @Override
+    public Boolean bindMailAddress(Long id) {
+
+        return null;
+    }
+
 
     private String createSendKey(){
         String string = UUID.randomUUID().toString();

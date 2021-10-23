@@ -17,4 +17,5 @@ public class CpConfig {
     private String corpId;
     private Long agentId;
     private String secret;
+    private String target;
 }

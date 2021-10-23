@@ -1,0 +1,15 @@
+mq:
+  mail:
+    queue-name: MailQueue #邮件队列名
+    exchange-name: MailExchange #邮件交换机名
+    routing-key: MailRouting #路由键名
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 30MB #文件上传最大大小
+  rabbitmq:
+    host:
+    username:
+    password:
+    virtual-host:

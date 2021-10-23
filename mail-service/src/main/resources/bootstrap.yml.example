@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr:
+      config:
+        server-addr:
+        file-extension: yaml
+  application:
+    name: mail-service
+server:
+  port:
