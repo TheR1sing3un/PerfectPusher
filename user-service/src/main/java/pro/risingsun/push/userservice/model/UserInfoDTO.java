@@ -17,11 +17,11 @@ public class UserInfoDTO {
 
     private Long id;
 
-    private Integer wxMpStatus;
+    private Boolean wxMpStatus;
 
-    private Integer wxCpStatus;
+    private Boolean wxCpStatus;
 
-    private Integer mailStatus;
+    private Boolean mailStatus;
 
     private CpConfig cpConfig;
 

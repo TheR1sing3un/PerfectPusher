@@ -16,6 +16,10 @@ public class UserException extends RuntimeException{
 
     public static final Integer USER_NO_EXIST = 43000;//用户不存在
 
+    public static final Integer MAIL_CODE_ERROR = 43001;//邮箱验证码错误
+
+    public static final Integer MAIL_NO_BIND = 430002;//没有绑定邮箱
+
     public Integer code;
 
     public String message;

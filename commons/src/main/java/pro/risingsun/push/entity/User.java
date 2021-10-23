@@ -20,9 +20,18 @@ public class User {
 
     private String openId;
 
-    private Integer wxMpStatus;
+    private Boolean wxMpStatus;
 
-    private Integer wxCpStatus;
+    private Boolean wxCpStatus;
 
-    private Integer mailStatus;
+    private Boolean mailStatus;
+
+    public User(String openId){
+        this.id = null;
+        this.openId = openId;
+        this.wxMpStatus = true;
+        this.wxCpStatus = false;
+        this.mailStatus = false;
+    }
+
 }

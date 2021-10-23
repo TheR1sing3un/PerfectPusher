@@ -1,10 +1,11 @@
 package pro.risingsun.push.userservice.controller;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pro.risingsun.push.entity.CpConfig;
 import pro.risingsun.push.model.CommonResult;
-import pro.risingsun.push.userservice.model.UserInfoDTO;
+import pro.risingsun.push.userservice.model.*;
 import pro.risingsun.push.userservice.service.UserService;
 
 /**
@@ -53,24 +54,70 @@ public class UserController {
 
     /**
      * 用户修改个人企业微信相关配置信息
-     * @param cpConfig
+     * @param cpConfigDTO
      * @return
      */
     @PutMapping("/cpConfig/{id}")
-    public CommonResult updateCpConfig(@PathVariable Long id ,@RequestBody CpConfig cpConfig){
-        cpConfig.setUserId(id);
-        CpConfig config = userService.updateCpConfig(cpConfig);
-        return CommonResult.ok().data(config);
+    public CommonResult updateCpConfig(@PathVariable Long id ,@RequestBody CpConfigDTO cpConfigDTO){
+        cpConfigDTO.setUserId(id);
+        CpConfigDTO configDTO = userService.updateCpConfig(cpConfigDTO);
+        return CommonResult.ok().data(configDTO);
     }
 
-    @PutMapping("/mail/{id}")
-    public CommonResult bindMailAddress(@PathVariable Long id){
-        userService.bindMailAddress(id);
+    /**
+     * 发送邮箱绑定验证码
+     * @param id
+     * @param mailAddress
+     * @return
+     */
+    @PostMapping("/mail/{id}")
+    public CommonResult bindMailAddress(@PathVariable Long id,@RequestBody MailAddressDTO mailAddress){
+        userService.bindMailAddress(id,mailAddress.getMailAddress());
         return CommonResult.ok();
     }
 
-    @PostMapping("/mail/{id}")
-    public CommonResult checkMailCode(@PathVariable Long id,@RequestBody Integer code){
+    /**
+     * 验证邮箱绑定验证码
+     * @param id
+     * @param mailCheckDTO
+     * @return
+     */
+    @PutMapping("/mail/{id}")
+    public CommonResult checkMailCode(@PathVariable Long id, @RequestBody MailCheckDTO mailCheckDTO){
+        UserMailDTO userMailDTO = userService.checkMailCode(mailCheckDTO.getCode(), new UserMailDTO(id,mailCheckDTO.getMailAddress()));
+        return CommonResult.ok().data(userMailDTO);
+    }
+
+    /**
+     * 更新官方公众号推送开关
+     * @param id
+     * @return
+     */
+    @PostMapping("/mpStatus/{id}")
+    public CommonResult updateMpStatus(@PathVariable("id") Long id){
+        userService.updateMpStatus(id);
+        return CommonResult.ok();
+    }
+
+    /**
+     * 解绑邮箱
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/mail/{id}")
+    public CommonResult deleteMailConfig(@PathVariable("id") Long id){
+        userService.deleteMailConfig(id);
+        return CommonResult.ok();
+    }
+
+    /**
+     * 更新邮箱推送开关
+     * @param id
+     * @return
+     */
+    @PostMapping("/mailStatus/{id}")
+    public CommonResult updateMailStatus(@PathVariable("id") Long id){
+        userService.updateMailStatus(id);
         return CommonResult.ok();
     }
 }

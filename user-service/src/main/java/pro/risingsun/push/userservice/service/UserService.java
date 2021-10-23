@@ -1,7 +1,8 @@
 package pro.risingsun.push.userservice.service;
 
-import pro.risingsun.push.entity.CpConfig;
+import pro.risingsun.push.userservice.model.CpConfigDTO;
 import pro.risingsun.push.userservice.model.UserInfoDTO;
+import pro.risingsun.push.userservice.model.UserMailDTO;
 
 /**
  * @author TheR1sing3un
@@ -16,8 +17,15 @@ public interface UserService {
 
     UserInfoDTO getUserInfo(Long id);
 
-    CpConfig updateCpConfig(CpConfig cpConfig);
+    CpConfigDTO updateCpConfig(CpConfigDTO cpConfigDTO);
 
-    Boolean bindMailAddress(Long id);
+    void bindMailAddress(Long id,String mailAddress);
 
+    UserMailDTO checkMailCode(Integer code,UserMailDTO userMailDTO);
+
+    void updateMpStatus(Long id);
+
+    void updateMailStatus(Long id);
+
+    void deleteMailConfig(Long id);
 }
