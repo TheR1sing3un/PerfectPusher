@@ -93,7 +93,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
      * @return
      */
     private Mono<Void> authError(ServerHttpResponse resp, TokenException tokenException) {
-        resp.setStatusCode(HttpStatus.UNAUTHORIZED);
+        resp.setStatusCode(HttpStatus.OK);
         resp.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         CommonResult result = CommonResult.error().code(tokenException.code).msg(tokenException.message);
         String jsonString = JSONObject.toJSONString(result);

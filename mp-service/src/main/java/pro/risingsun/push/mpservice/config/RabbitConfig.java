@@ -33,4 +33,5 @@ public class RabbitConfig implements RabbitListenerConfigurer {
     public MappingJackson2MessageConverter consumerJackson2MessageConverter() {
         return new MappingJackson2MessageConverter();
     }
+
 }
