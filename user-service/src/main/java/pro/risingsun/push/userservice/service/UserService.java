@@ -1,7 +1,9 @@
 package pro.risingsun.push.userservice.service;
 
+import pro.risingsun.push.entity.User;
+import pro.risingsun.push.model.UserChannelDTO;
 import pro.risingsun.push.userservice.model.CpConfigDTO;
-import pro.risingsun.push.userservice.model.UserInfoDTO;
+import pro.risingsun.push.model.UserInfoDTO;
 import pro.risingsun.push.userservice.model.UserMailDTO;
 
 /**
@@ -28,4 +30,6 @@ public interface UserService {
     void updateMailStatus(Long id);
 
     void deleteMailConfig(Long id);
+
+    UserChannelDTO getUserChannelBySendKey(String sendKey);
 }

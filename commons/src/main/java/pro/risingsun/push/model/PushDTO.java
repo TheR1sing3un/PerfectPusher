@@ -24,4 +24,10 @@ public class PushDTO {
 
     private String content;
 
+    public PushDTO(String title,String desc,String content){
+        this.title = title;
+        this.desc = desc;
+        this.content = content;
+    }
+
 }

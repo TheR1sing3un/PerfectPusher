@@ -6,10 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pro.risingsun.push.entity.User;
 import pro.risingsun.push.model.PushDTO;
+import pro.risingsun.push.model.UserChannelDTO;
 import pro.risingsun.push.userservice.exception.UserException;
 import pro.risingsun.push.userservice.mapper.UserMapper;
 import pro.risingsun.push.userservice.model.CpConfigDTO;
-import pro.risingsun.push.userservice.model.UserInfoDTO;
+import pro.risingsun.push.model.UserInfoDTO;
 import pro.risingsun.push.userservice.model.UserMailDTO;
 import pro.risingsun.push.userservice.service.PushFeignService;
 import pro.risingsun.push.userservice.service.UserService;
@@ -48,10 +49,13 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.getUserByOpenId(openId);
         //当数据库没有该用户时,注册该用户
         if (user == null){
-            userMapper.insertUser(new User(openId));
-            user = userMapper.getUserByOpenId(openId);
+            User newUser = new User(openId);
+            //设置sendKey
             String sendKey = createSendKey();
-            redisUtils.hset(SEND_KEY_KEY_NAME,user.getId().toString(),sendKey);
+            newUser.setSendKey(sendKey);
+            //插入到数据库中
+            userMapper.insertUser(newUser);
+            user = userMapper.getUserByOpenId(openId);
         }
         return user.getId();
     }
@@ -59,15 +63,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public String updateSendKey(Long id) {
         String sendKey = createSendKey();
-        redisUtils.hset(SEND_KEY_KEY_NAME,id.toString(),sendKey);
+        userMapper.updateSendKey(id,sendKey);
         return sendKey;
     }
 
     @Override
     public UserInfoDTO getUserInfo(Long id) {
         UserInfoDTO userInfoById = userMapper.getUserInfoById(id);
-        userInfoById.setSendKey(redisUtils.hget(SEND_KEY_KEY_NAME,id.toString()).toString());
         return userInfoById;
+    }
+
+    @Override
+    public UserChannelDTO getUserChannelBySendKey(String sendKey){
+        UserChannelDTO user  = userMapper.getUserInfoBySendKey(sendKey);
+        System.out.println("user"+user);
+        return user;
     }
 
     /**
@@ -119,7 +129,7 @@ public class UserServiceImpl implements UserService {
             throw new UserException(UserException.MAIL_CODE_ERROR,"邮箱验证码错误或已过期");
         }else {
             //验证通过则更新用户的邮箱地址
-            userMapper.updateEmailAddress(userMailDTO);
+            userMapper.insertEmailAddress(userMailDTO);
             return userMailDTO;
         }
     }

@@ -1,14 +1,10 @@
 package pro.risingsun.push.pushservice.controller;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.risingsun.push.model.CommonResult;
 import pro.risingsun.push.model.PushDTO;
+import pro.risingsun.push.pushservice.service.PushService;
 
 /**
  * @author TheR1sing3un
@@ -20,13 +16,8 @@ import pro.risingsun.push.model.PushDTO;
 public class PushController {
 
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    PushService pushService;
 
-    @Value("${mq.mail.exchange-name}")
-    private String MAIL_EXCHANGE_NAME;
-
-    @Value("${mq.mail.routing-key}")
-    private String MAIL_ROUTING_KEY;
 
     /**
      * 推送邮件到消息队列
@@ -35,8 +26,26 @@ public class PushController {
      */
     @PostMapping("/mail")
     public CommonResult pushEmail(@RequestBody PushDTO pushDTO){
-        rabbitTemplate.convertAndSend(MAIL_EXCHANGE_NAME,MAIL_ROUTING_KEY,pushDTO);
+        pushService.sendEmail(pushDTO);
         return CommonResult.ok();
     }
 
+    /**
+     * 推送用户请求的默认推送请求到各个通道的队列中
+     * @param sendKey
+     * @param title
+     * @param desc
+     * @param content
+     * @return
+     */
+    @GetMapping("/{sendKey}")
+    public CommonResult push(@PathVariable String sendKey,@RequestParam(value = "title") String title,
+                             @RequestParam(value = "desc",required = false) String desc ,
+                             @RequestParam(value = "content",required = false) String content){
+        System.out.println("sendKey:"+sendKey);
+        PushDTO pushDTO = new PushDTO(title,desc,content);
+        System.out.println(pushDTO);
+        pushService.pushWithSendKey(sendKey,pushDTO);
+        return CommonResult.ok();
+    }
 }

@@ -3,9 +3,7 @@ package pro.risingsun.push.userservice;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pro.risingsun.push.entity.CpConfig;
 import pro.risingsun.push.userservice.mapper.UserMapper;
-import pro.risingsun.push.userservice.model.UserInfoDTO;
 import pro.risingsun.push.userservice.service.UserService;
 import pro.risingsun.push.userservice.utils.RedisUtils;
 

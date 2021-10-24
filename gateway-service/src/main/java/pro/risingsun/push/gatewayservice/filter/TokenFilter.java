@@ -54,6 +54,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
         String headerToken = exchange.getRequest().getHeaders().getFirst(token);
+        log.info("token:{}",headerToken);
         try{
             int id = jwtUtils.parserTokenToId(headerToken);
         }catch (TokenException e){

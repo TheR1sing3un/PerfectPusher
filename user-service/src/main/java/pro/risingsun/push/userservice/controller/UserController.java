@@ -1,10 +1,9 @@
 package pro.risingsun.push.userservice.controller;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pro.risingsun.push.entity.CpConfig;
 import pro.risingsun.push.model.CommonResult;
+import pro.risingsun.push.model.UserInfoDTO;
 import pro.risingsun.push.userservice.model.*;
 import pro.risingsun.push.userservice.service.UserService;
 

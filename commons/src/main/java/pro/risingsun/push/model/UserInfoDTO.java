@@ -1,7 +1,6 @@
-package pro.risingsun.push.userservice.model;
+package pro.risingsun.push.model;
 
 import lombok.*;
-import org.apache.ibatis.annotations.Select;
 import pro.risingsun.push.entity.CpConfig;
 import pro.risingsun.push.entity.MailConfig;
 

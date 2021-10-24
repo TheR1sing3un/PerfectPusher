@@ -26,12 +26,23 @@ public class User {
 
     private Boolean mailStatus;
 
+    private String sendKey;
+
     public User(String openId){
         this.id = null;
         this.openId = openId;
         this.wxMpStatus = true;
         this.wxCpStatus = false;
         this.mailStatus = false;
+    }
+
+    public User(String openId,String sendKey){
+        this.id = null;
+        this.openId = openId;
+        this.wxMpStatus = true;
+        this.wxCpStatus = false;
+        this.mailStatus = false;
+        this.sendKey = sendKey;
     }
 
 }

@@ -37,7 +37,7 @@ public class JwtUtils {
      */
     public String createToken(Long id) {
         //定义过期时间
-        Date expiredDate = new Date(System.currentTimeMillis() + expire * 10000);
+        Date expiredDate = new Date(System.currentTimeMillis() + expire * 1000);
         //定义头部信息
         Map<String, Object> map = new HashMap<>();
         map.put("typ", "JWT");//添加头部参数
