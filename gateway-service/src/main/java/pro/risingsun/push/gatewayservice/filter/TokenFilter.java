@@ -1,7 +1,6 @@
 package pro.risingsun.push.gatewayservice.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,6 @@ public class TokenFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
         String headerToken = exchange.getRequest().getHeaders().getFirst(token);
-        log.info("token:{}",headerToken);
         try{
             int id = jwtUtils.parserTokenToId(headerToken);
         }catch (TokenException e){

@@ -1,4 +1,4 @@
-package pro.risingsun.push.mpservice.controller;
+package pro.risingsun.push.mpservice.server;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

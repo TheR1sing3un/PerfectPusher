@@ -7,17 +7,15 @@ import me.chanjar.weixin.mp.api.WxMpMessageHandler;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pro.risingsun.push.model.CommonResult;
 import pro.risingsun.push.model.LoginReplyDTO;
 import pro.risingsun.push.mpservice.builder.OutTextMessageBuilder;
-import pro.risingsun.push.mpservice.controller.WebSocketServer;
+import pro.risingsun.push.mpservice.server.WebSocketServer;
 import pro.risingsun.push.mpservice.exception.SocketException;
 import pro.risingsun.push.mpservice.model.ReplyDTO;
 import pro.risingsun.push.mpservice.service.LoginService;
-import pro.risingsun.push.mpservice.service.UserFeignService;
 
 import java.util.Map;
 
