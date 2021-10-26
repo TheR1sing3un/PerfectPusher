@@ -4,6 +4,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
@@ -18,14 +19,8 @@ import org.springframework.context.annotation.Configuration;
 @RefreshScope
 public class MailRabbitConfig {
 
-    @Value("${mq.mail.queue-name}")
-    private String MAIL_QUEUE_NAME;
-
-    @Value("${mq.mail.exchange-name}")
-    private String MAIL_EXCHANGE_NAME;
-
-    @Value("${mq.mail.routing-key}")
-    private String MAIL_ROUTING_KEY;
+    @Autowired
+    private MqNameConfig mqNameConfig;
 
     /**
      * 注入邮件队列
@@ -33,7 +28,7 @@ public class MailRabbitConfig {
      */
     @Bean
     public Queue mailQueue(){
-        return new Queue(MAIL_QUEUE_NAME,true);
+        return new Queue(mqNameConfig.MAIL_QUEUE_NAME,true);
     }
 
     /**
@@ -42,7 +37,7 @@ public class MailRabbitConfig {
      */
     @Bean
     DirectExchange mailExchange(){
-        return new DirectExchange(MAIL_EXCHANGE_NAME,true,false);
+        return new DirectExchange(mqNameConfig.MAIL_EXCHANGE_NAME,true,false);
     }
 
     /**
@@ -51,6 +46,6 @@ public class MailRabbitConfig {
      */
     @Bean
     Binding bindingMail(){
-        return BindingBuilder.bind(mailQueue()).to(mailExchange()).with(MAIL_ROUTING_KEY);
+        return BindingBuilder.bind(mailQueue()).to(mailExchange()).with(mqNameConfig.MAIL_ROUTING_KEY);
     }
 }

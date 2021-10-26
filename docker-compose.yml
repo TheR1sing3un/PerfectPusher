@@ -1,0 +1,85 @@
+﻿version: "3.3" #docker-compose版本，部分情况下需要版本对应
+services: #我们需要启动的服务
+  gateway-service: #web服务
+    container_name: perfect-pusher-gateway #创建出来的容器名字
+    image: project-perfect-pusher-gateway #镜像
+    volumes:
+    - /usr/project/perfect_pusher/gateway_service/data #挂载数据
+    expose: #该镜像对外暴露的端口
+      - 80
+    ports: #端口映射
+      - "14000:80"
+    restart: unless-stopped #重启策略
+    build: #使用Dockerfile构建
+      context: gateway_service #Dockerfile位于当前目录下
+      dockerfile: Dockerfile
+
+  user-service: #web服务
+    container_name: perfect-pusher-user #创建出来的容器名字
+    image: project-perfect-pusher-user #镜像
+    volumes:
+    - /usr/project/perfect_pusher/user_service/data #挂载数据
+    expose: #该镜像对外暴露的端口
+      - 80
+    ports: #端口映射
+      - "14001:80"
+    restart: unless-stopped #重启策略
+    build: #使用Dockerfile构建
+      context: user_service #Dockerfile位于当前目录下
+      dockerfile: Dockerfile
+
+  push-service: #web服务
+    container_name: perfect-pusher-push #创建出来的容器名字
+    image: project-perfect-pusher-push #镜像
+    volumes:
+    - /usr/project/perfect_pusher/push_service/data #挂载数据
+    expose: #该镜像对外暴露的端口
+      - 80
+    ports: #端口映射
+      - "14002:80"
+    restart: unless-stopped #重启策略
+    build: #使用Dockerfile构建
+      context: push_service #Dockerfile位于当前目录下
+      dockerfile: Dockerfile
+
+  mp-service: #web服务
+    container_name: perfect-pusher-mp #创建出来的容器名字
+    image: project-perfect-pusher-mp #镜像
+    volumes:
+    - /usr/project/perfect_pusher/mp_service/data #挂载数据
+    expose: #该镜像对外暴露的端口
+      - 80
+    ports: #端口映射
+      - "14003:80"
+    restart: unless-stopped #重启策略
+    build: #使用Dockerfile构建
+      context: mp_service #Dockerfile位于当前目录下
+      dockerfile: Dockerfile
+
+  mail-service: #web服务
+    container_name: perfect-pusher-mail #创建出来的容器名字
+    image: project-perfect-pusher-mail #镜像
+    volumes:
+    - /usr/project/perfect_pusher/mail_service/data #挂载数据
+    expose: #该镜像对外暴露的端口
+      - 80
+    ports: #端口映射
+      - "14004:80"
+    restart: unless-stopped #重启策略
+    build: #使用Dockerfile构建
+      context: mail_service #Dockerfile位于当前目录下
+      dockerfile: Dockerfile
+
+  cp-service: #web服务
+    container_name: perfect-pusher-cp #创建出来的容器名字
+    image: project-perfect-pusher-cp #镜像
+    volumes:
+    - /usr/project/perfect_pusher/cp_service/data #挂载数据
+    expose: #该镜像对外暴露的端口
+      - 80
+    ports: #端口映射
+      - "14005:80"
+    restart: unless-stopped #重启策略
+    build: #使用Dockerfile构建
+      context: cp_service #Dockerfile位于当前目录下
+      dockerfile: Dockerfile

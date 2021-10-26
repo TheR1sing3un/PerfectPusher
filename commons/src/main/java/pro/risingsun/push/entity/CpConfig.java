@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class CpConfig {
     private Long userId;
     private String corpId;
-    private Long agentId;
+    private Integer agentId;
     private String secret;
     private String target;
 }

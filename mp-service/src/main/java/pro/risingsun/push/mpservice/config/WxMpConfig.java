@@ -6,6 +6,7 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "wx.mp")
 @Configuration
 @Data
+@RefreshScope
 public class WxMpConfig {
     @Value("${wx.mp.appId}")
     private String appId;
@@ -30,12 +32,17 @@ public class WxMpConfig {
     private Integer expire;
     @Value("${wx.mp.showCodeUrl}")
     private String showCodeUrl;
+    @Value("${wx.mp.template-id}")
+    private String templateId;
+    @Value("${wx.mp.aes-key}")
+    private String aesKey;
     @Bean
     public WxMpService wxMpService(){
         WxMpDefaultConfigImpl config = new WxMpDefaultConfigImpl();
         config.setAppId(appId);
         config.setSecret(appSecret);
         config.setToken(token);
+        config.setAesKey(aesKey);
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(config);
         return wxMpService;

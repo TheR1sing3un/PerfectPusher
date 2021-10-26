@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserChannelDTO getUserChannelBySendKey(String sendKey){
         UserChannelDTO user  = userMapper.getUserInfoBySendKey(sendKey);
-        System.out.println("user"+user);
         return user;
     }
 
@@ -108,7 +107,7 @@ public class UserServiceImpl implements UserService {
         Random random = new Random();
         //生成6位随机验证码
         Integer code = random.nextInt(900000) + 99999;
-        PushDTO pushDTO = new PushDTO(mailAddress,null,"PerfectPusher邮箱绑定验证",null,code.toString());
+        PushDTO pushDTO = new PushDTO(mailAddress,"PerfectPusher邮箱绑定验证","你正在PerfectPusher中绑定邮箱","验证码 : "+code.toString());
         //调用推送服务进行邮件推送
         pushFeignService.pushEmail(pushDTO);
         //将验证码信息存入redis,过期时间5分钟

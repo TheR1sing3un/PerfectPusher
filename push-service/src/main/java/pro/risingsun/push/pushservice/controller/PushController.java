@@ -41,10 +41,9 @@ public class PushController {
     @GetMapping("/{sendKey}")
     public CommonResult push(@PathVariable String sendKey,@RequestParam(value = "title") String title,
                              @RequestParam(value = "desc",required = false) String desc ,
-                             @RequestParam(value = "content",required = false) String content){
-        System.out.println("sendKey:"+sendKey);
-        PushDTO pushDTO = new PushDTO(title,desc,content);
-        System.out.println(pushDTO);
+                             @RequestParam(value = "content") String content,
+                             @RequestParam(value = "url",required = false)String url){
+        PushDTO pushDTO = new PushDTO(title,desc,content,url);
         pushService.pushWithSendKey(sendKey,pushDTO);
         return CommonResult.ok();
     }

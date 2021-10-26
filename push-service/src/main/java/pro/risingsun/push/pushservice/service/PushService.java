@@ -15,4 +15,6 @@ public interface PushService {
     void sendEmail(PushDTO pushDTO);
 
     void sendMpMessage(PushDTO pushDTO);
+
+    void sendCpMessage(PushDTO pushDTO);
 }

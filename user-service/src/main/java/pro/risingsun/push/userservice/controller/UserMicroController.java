@@ -23,7 +23,6 @@ public class UserMicroController {
 
     @GetMapping("/config/{sendKey}")
     public UserChannelDTO getUserChannelBySendKey(@PathVariable("sendKey") String sendKey){
-        System.out.println(sendKey);
         return userService.getUserChannelBySendKey(sendKey);
     }
 
